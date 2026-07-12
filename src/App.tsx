@@ -187,7 +187,6 @@ export default function App() {
                   if (tr) setSelectedTrail(tr);
                   setActiveScreen("TRAIL_DETAIL");
                 }}
-                activeTab="Trails"
               />
             )}
 

@@ -6,15 +6,11 @@ import { TRAILS_DATA } from "../data";
 interface HomeScreenProps {
   onFindTrail: () => void;
   onSelectTrail: (trailId: string) => void;
-  onNavigateTab: (tabId: string) => void;
-  activeTab: string;
 }
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({
   onFindTrail,
   onSelectTrail,
-  onNavigateTab,
-  activeTab,
 }) => {
   const [selectedFilter, setSelectedFilter] = useState("Nearby");
 
