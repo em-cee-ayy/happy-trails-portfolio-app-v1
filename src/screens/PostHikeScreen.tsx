@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 
-export function PostHikeScreen({ onSave }: { onSave: () => void }) {
+export function PostHikeScreen() {
+  const navigate = useNavigate();
   const [restoration, setRestoration] = useState(4.0);
   const [clarity, setClarity] = useState(3.5);
   const [energyShift, setEnergyShift] = useState(4.5);
 
+  const handleSave = () => navigate("/home");
+
   return (
     <div className="flex flex-col h-full bg-[var(--color-paper)] relative">
       <header className="px-4 pt-10 pb-4 flex items-center border-b border-[var(--color-forest)]/10 bg-[var(--color-paper)]/80 backdrop-blur-md sticky top-0 z-10">
-        <button onClick={onSave} className="p-2 -ml-2 text-[var(--color-forest)]">
+        <button onClick={handleSave} className="p-2 -ml-2 text-[var(--color-forest)]">
           <ChevronLeft size={24} strokeWidth={1.5} />
         </button>
         <h1 className="font-serif italic text-lg text-[var(--color-forest)] ml-2">reflection</h1>
@@ -94,9 +98,10 @@ export function PostHikeScreen({ onSave }: { onSave: () => void }) {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-[var(--color-paper)] via-[var(--color-paper)] to-transparent">
+      {/* bottom-16 clears the persistent bottom nav */}
+      <div className="absolute bottom-16 left-0 right-0 p-4 bg-gradient-to-t from-[var(--color-paper)] via-[var(--color-paper)] to-transparent">
         <button
-          onClick={onSave}
+          onClick={handleSave}
           className="w-full h-[48px] bg-[var(--color-pine)] text-white rounded-[8px] font-bold text-[14px] tracking-wide shadow-lg active:scale-[0.98] transition-transform"
         >
           Save & Return

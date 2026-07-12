@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ChevronLeft, Heart } from "lucide-react";
 
-export function ComponentsScreen({ onBack }: { onBack: () => void }) {
+export function ComponentsScreen() {
+  const navigate = useNavigate();
+  const onBack = () => navigate("/home");
   const [sliderVal, setSliderVal] = useState(3.0);
 
   return (

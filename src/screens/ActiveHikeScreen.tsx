@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Download, Lock } from "lucide-react";
-import { Trail } from "../types";
 
-export function ActiveHikeScreen({ trail, onFinish }: { trail: Trail, onFinish: () => void }) {
+export function ActiveHikeScreen() {
+  const navigate = useNavigate();
+  const onFinish = () => navigate("/post-hike");
   const [seconds, setSeconds] = useState(1821); // Starts at 00:30:21
 
   useEffect(() => {

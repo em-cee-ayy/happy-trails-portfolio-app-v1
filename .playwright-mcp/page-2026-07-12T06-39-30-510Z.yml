@@ -1,0 +1,67 @@
+- generic [ref=f1e3]:
+  - generic [ref=f1e5]:
+    - generic [ref=f1e6]:
+      - banner [ref=f1e7]:
+        - generic [ref=f1e8]:
+          - heading "happy trails AI" [level=1] [ref=f1e9]
+          - paragraph [ref=f1e10]: NEUROSCIENCE-LED RESTORATION FRAMEWORK
+        - generic [ref=f1e11]: Design Specification
+      - generic [ref=f1e13]:
+        - paragraph [ref=f1e14]: This interactive mockup suite highlights the AI + Attention Restoration Theory (ART) layer that distinguishes Happy Trails AI.
+        - paragraph [ref=f1e15]: In involuntary attention restoration (Kaplan & Kaplan, 1989), natural environments containing soft sensory movement (e.g., wind rustling forest branches, bubbling water currents) downregulate the prefrontal cortex—enabling the executive mental control loops to fully recover.
+      - generic [ref=f1e16]:
+        - heading "Scientific Core (The 4 ART Dimensions)" [level=3] [ref=f1e17]
+        - generic [ref=f1e21]:
+          - generic [ref=f1e22]:
+            - generic [ref=f1e23]: 🏡 Being Away
+            - text: Psychological distance from ordinary, fatiguing daily urban stress.
+          - generic [ref=f1e24]:
+            - generic [ref=f1e25]: ✨ Fascination
+            - text: Involuntary attraction triggers passive mental ease & recovery.
+          - generic [ref=f1e26]:
+            - generic [ref=f1e27]: 🌍 Extent
+            - text: Immersion in a rich, coherent world apart from standard focus demands.
+          - generic [ref=f1e28]:
+            - generic [ref=f1e29]: ❤️ Compatibility
+            - text: Perfect fit between your current cognitive state and surroundings.
+      - generic [ref=f1e30]:
+        - heading "Direct Screen Preset Deck" [level=3] [ref=f1e31]
+        - generic [ref=f1e37]:
+          - link "Onboarding 1 — Value Prop" [ref=f1e38] [cursor=pointer]:
+            - /url: /
+          - link "Onboarding 2 — Data Story" [ref=f1e40] [cursor=pointer]:
+            - /url: /onboarding-2
+          - link "Cognitive Check-In" [ref=f1e42] [cursor=pointer]:
+            - /url: /check-in
+          - link "AI Processing" [ref=f1e44] [cursor=pointer]:
+            - /url: /processing?trail=boulder_creek
+          - link "Trails Home" [ref=f1e46] [cursor=pointer]:
+            - /url: /home
+          - link "Trail Detail — Hero & Breakdown" [ref=f1e48] [cursor=pointer]:
+            - /url: /trail/boulder_creek
+          - link "Active Hike" [ref=f1e50] [cursor=pointer]:
+            - /url: /hike/boulder_creek
+          - link "Post-Hike Reflection" [ref=f1e52] [cursor=pointer]:
+            - /url: /post-hike
+          - link "Trail Map" [ref=f1e54] [cursor=pointer]:
+            - /url: /map
+          - link "Community Feed" [ref=f1e56] [cursor=pointer]:
+            - /url: /feed
+          - link "Profile" [ref=f1e58] [cursor=pointer]:
+            - /url: /profile
+          - link "Insights & Patterns" [ref=f1e60] [cursor=pointer]:
+            - /url: /insights
+          - link "No-Match Honest State" [ref=f1e62] [cursor=pointer]:
+            - /url: /no-match
+          - link "Components Sheet" [ref=f1e64] [cursor=pointer]:
+            - /url: /components
+        - paragraph [ref=f1e66]: "⚠️ Tip: Switch screens instantly using this navigator panel or interact with the preview device!"
+    - generic [ref=f1e67]:
+      - generic [ref=f1e68]: "Sindy's Device Clock: 3:39 PM"
+      - generic [ref=f1e69]: High Density Frame Ratio
+  - generic [ref=f1e76]:
+    - generic [ref=f1e77]:
+      - img "Forest" [ref=f1e79]
+      - heading "trails for your nervous system, not just your legs." [level=1] [ref=f1e80]
+      - paragraph [ref=f1e81]: A beautifully modernized field guide driven by a scientific instrument. We match trails to your cognitive state using Attention Restoration Theory.
+    - button "Continue" [ref=f1e83]

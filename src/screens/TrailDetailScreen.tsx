@@ -1,20 +1,22 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { ChevronLeft, Share, MapPin, Heart } from "lucide-react";
-import { Trail } from "../types";
+import { TRAILS_DATA } from "../data";
 
-interface TrailDetailScreenProps {
-  trail: Trail;
-  onBack: () => void;
-  onStartHike: () => void;
-}
-
-export function TrailDetailScreen({ trail, onBack, onStartHike }: TrailDetailScreenProps) {
+export function TrailDetailScreen() {
+  const navigate = useNavigate();
+  const { id } = useParams();
   const [liked, setLiked] = useState(false);
+
+  const trail = TRAILS_DATA.find((t) => t.id === id);
+  if (!trail) {
+    return <Navigate to="/no-match" replace />;
+  }
 
   return (
     <div className="flex flex-col h-full bg-[var(--color-paper)] relative">
       <header className="absolute top-0 left-0 right-0 p-4 flex items-center justify-between z-10">
-        <button onClick={onBack} className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/20">
+        <button onClick={() => navigate("/home")} className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/20">
           <ChevronLeft size={20} strokeWidth={2} className="-ml-0.5" />
         </button>
         <div className="flex gap-2">
@@ -35,13 +37,13 @@ export function TrailDetailScreen({ trail, onBack, onStartHike }: TrailDetailScr
         </div>
 
         <div className="p-4 -mt-4 relative bg-[var(--color-paper)] rounded-t-[12px] space-y-8">
-          
+
           <div className="space-y-3">
             <div className="flex gap-2 text-[12px] uppercase font-bold tracking-wider text-[var(--color-forest)]/60">
               <span className="flex items-center gap-1"><MapPin size={12} /> {trail.location}</span>
             </div>
             <h1 className="font-serif text-[22px] leading-tight text-[var(--color-forest)]">{trail.name}</h1>
-            
+
             {/* Meta row */}
             <div className="flex items-center gap-3 text-[14px] font-sans text-[var(--color-forest)]">
               <span className="font-mono tabular-nums">{trail.distance}</span>
@@ -52,7 +54,7 @@ export function TrailDetailScreen({ trail, onBack, onStartHike }: TrailDetailScr
                 <span className="text-[12px] font-bold">ART {trail.matchScore}</span>
               </div>
             </div>
-            
+
             {trail.isRestorative && (
               <div className="inline-block mt-2 px-2.5 py-1 bg-[var(--color-restorative)] rounded-full">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-white">Restorative</span>
@@ -92,7 +94,7 @@ export function TrailDetailScreen({ trail, onBack, onStartHike }: TrailDetailScr
               })}
             </div>
           </div>
-          
+
           {trail.conditions.length > 0 && (
             <div className="space-y-2 pb-6">
               <h3 className="text-[14px] font-bold text-[var(--color-forest)] uppercase tracking-wider">Dynamic Conditions</h3>
@@ -109,9 +111,10 @@ export function TrailDetailScreen({ trail, onBack, onStartHike }: TrailDetailScr
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-[var(--color-paper)] via-[var(--color-paper)] to-transparent">
+      {/* bottom-16 clears the persistent bottom nav */}
+      <div className="absolute bottom-16 left-0 right-0 p-4 bg-gradient-to-t from-[var(--color-paper)] via-[var(--color-paper)] to-transparent">
         <button
-          onClick={onStartHike}
+          onClick={() => navigate(`/hike/${trail.id}`)}
           className="w-full h-[48px] bg-[var(--color-pine)] text-white rounded-[8px] font-bold text-[14px] tracking-wide shadow-lg active:scale-[0.98] transition-transform"
         >
           Begin Trail

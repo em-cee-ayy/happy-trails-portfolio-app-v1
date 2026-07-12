@@ -1,0 +1,38 @@
+import { useNavigate } from "react-router-dom";
+import { ChevronLeft } from "lucide-react";
+
+export function NoMatchScreen() {
+  const navigate = useNavigate();
+  const goHome = () => navigate("/home");
+
+  return (
+    <div className="flex flex-col h-full bg-[var(--color-paper)] relative">
+      <header className="px-4 pt-10 pb-4 flex items-center border-b border-[var(--color-forest)]/10 bg-[var(--color-paper)]/80 backdrop-blur-md sticky top-0 z-10">
+        <button onClick={goHome} className="p-2 -ml-2 text-[var(--color-forest)]">
+          <ChevronLeft size={24} strokeWidth={1.5} />
+        </button>
+      </header>
+
+      <div className="flex-1 flex flex-col items-center justify-center p-6 text-center">
+        <div className="w-16 h-16 rounded-full bg-[var(--color-alert)]/10 flex items-center justify-center mb-6">
+          <span className="text-[24px]">🧭</span>
+        </div>
+        <h2 className="font-serif text-[22px] text-[var(--color-forest)] mb-3">No Perfect Match Nearby</h2>
+        <p className="font-sans text-[14px] text-[var(--color-forest)]/70 mb-8 leading-relaxed">
+          The trails currently available within your radius do not strongly align with your cognitive state.
+        </p>
+
+        <div className="bg-[var(--color-paper-deep)] p-4 rounded-[12px] border border-[var(--color-forest)]/10 text-left w-full">
+          <h3 className="text-[10px] font-bold uppercase tracking-wider text-[var(--color-forest)]/60 mb-1">Closest fit — not a full match</h3>
+          <p className="font-sans text-[14px] text-[var(--color-forest)]/80">
+            Sky Pond is nearby but requires high exertion, which contradicts your depleted state.
+          </p>
+        </div>
+
+        <button onClick={goHome} className="mt-8 px-6 py-3 rounded-[8px] border border-[var(--color-forest)]/20 font-bold text-[14px] text-[var(--color-forest)] active:bg-[var(--color-paper-deep)]">
+          Expand Radius
+        </button>
+      </div>
+    </div>
+  );
+}

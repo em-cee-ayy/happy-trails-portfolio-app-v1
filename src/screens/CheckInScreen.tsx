@@ -1,20 +1,24 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 
-interface CheckInScreenProps {
-  onBack: () => void;
-  onSubmit: (state: string) => void;
-}
-
-export function CheckInScreen({ onBack, onSubmit }: CheckInScreenProps) {
+export function CheckInScreen() {
+  const navigate = useNavigate();
   const [energy, setEnergy] = useState<number>(3.0);
   const [focus, setFocus] = useState<number>(3.0);
   const [note, setNote] = useState<string>("");
 
+  // Mockup matching heuristic: depleted energy maps to the low-exertion
+  // restorative trail, wired energy to the high-exertion counterexample.
+  const handleSubmit = () => {
+    const matchedTrailId = energy < 2.5 ? "boulder_creek" : "sky_pond";
+    navigate(`/processing?trail=${matchedTrailId}`);
+  };
+
   return (
     <div className="flex flex-col h-full bg-[var(--color-paper)] relative">
       <header className="px-4 pt-10 pb-4 flex items-center justify-between border-b border-[var(--color-forest)]/10 bg-[var(--color-paper)]/80 backdrop-blur-md z-10 sticky top-0">
-        <button onClick={onBack} className="p-2 -ml-2 text-[var(--color-forest)]">
+        <button onClick={() => navigate("/home")} className="p-2 -ml-2 text-[var(--color-forest)]">
           <ChevronLeft size={24} strokeWidth={1.5} />
         </button>
         <h1 className="font-serif italic text-lg text-[var(--color-forest)]">cognitive state</h1>
@@ -77,7 +81,7 @@ export function CheckInScreen({ onBack, onSubmit }: CheckInScreenProps) {
               className="w-full bg-[var(--color-paper-deep)] border-none rounded-[8px] p-4 text-[14px] text-[var(--color-forest)] placeholder:text-[var(--color-forest)]/40 focus:ring-2 focus:ring-[var(--color-pine)]/50 resize-none h-24 font-sans"
             />
           </div>
-          
+
           <div className="bg-[var(--color-art-comp)]/10 p-4 rounded-[8px] flex gap-3 items-start border border-[var(--color-art-comp)]/20">
             <div className="w-2 h-2 rounded-full bg-[var(--color-art-comp)] mt-1.5 shrink-0" />
             <p className="text-[12px] text-[var(--color-forest)]/80 leading-relaxed font-sans">
@@ -87,9 +91,10 @@ export function CheckInScreen({ onBack, onSubmit }: CheckInScreenProps) {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-[var(--color-paper)] via-[var(--color-paper)] to-transparent">
+      {/* bottom-16 clears the persistent bottom nav */}
+      <div className="absolute bottom-16 left-0 right-0 p-4 bg-gradient-to-t from-[var(--color-paper)] via-[var(--color-paper)] to-transparent">
         <button
-          onClick={() => onSubmit(energy < 2.5 ? "depleted" : "wired")}
+          onClick={handleSubmit}
           className="w-full h-[48px] bg-[var(--color-pine)] text-white rounded-[8px] font-bold text-[14px] tracking-wide shadow-lg active:scale-[0.98] transition-transform"
         >
           Find My Trail

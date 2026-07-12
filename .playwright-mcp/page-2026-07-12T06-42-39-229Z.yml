@@ -1,0 +1,64 @@
+- generic [ref=f3e3]:
+  - generic [ref=f3e5]:
+    - generic [ref=f3e7]:
+      - banner [ref=f3e8]:
+        - button [ref=f3e9]
+        - generic [ref=f3e12]:
+          - button [ref=f3e13]
+          - button [ref=f3e17]
+      - generic [ref=f3e20]:
+        - img "Sky Pond" [ref=f3e22]
+        - generic [ref=f3e24]:
+          - generic [ref=f3e25]:
+            - generic [ref=f3e26]: Rocky Mountain NP
+            - heading "Sky Pond" [level=1] [ref=f3e31]
+            - generic [ref=f3e32]:
+              - generic [ref=f3e33]: 13.1 km
+              - generic [ref=f3e34]: •
+              - generic [ref=f3e35]: 4h 45m
+              - generic [ref=f3e36]: •
+              - generic [ref=f3e37]: ART 42
+          - generic [ref=f3e39]:
+            - heading "Match Explanation" [level=3] [ref=f3e40]
+            - paragraph [ref=f3e41]: high extent, but extreme cognitive clutter — contradicts your depleted state
+          - generic [ref=f3e42]:
+            - heading "ART Breakdown" [level=3] [ref=f3e43]
+            - generic [ref=f3e44]:
+              - generic [ref=f3e45]:
+                - generic [ref=f3e46]:
+                  - generic [ref=f3e47]: being away
+                  - generic [ref=f3e48]: "98"
+                - paragraph [ref=f3e51]: total immersion in alpine wilderness
+              - generic [ref=f3e52]:
+                - generic [ref=f3e53]:
+                  - generic [ref=f3e54]: fascination
+                  - generic [ref=f3e55]: "85"
+                - paragraph [ref=f3e58]: dramatic peaks demand attention
+              - generic [ref=f3e59]:
+                - generic [ref=f3e60]:
+                  - generic [ref=f3e61]: extent
+                  - generic [ref=f3e62]: "94"
+                - paragraph [ref=f3e65]: vast, world-apart scale
+              - generic [ref=f3e66]:
+                - generic [ref=f3e67]:
+                  - generic [ref=f3e68]: compatibility
+                  - generic [ref=f3e69]: "20"
+                - paragraph [ref=f3e72]: high exertion and navigation stress
+          - generic [ref=f3e73]:
+            - heading "Dynamic Conditions" [level=3] [ref=f3e74]
+            - generic [ref=f3e75]:
+              - generic [ref=f3e76]: steep scramble
+              - generic [ref=f3e77]: windy at lake
+              - generic [ref=f3e78]: crowded at trailhead
+      - button "Begin Trail" [ref=f3e80]
+    - generic [ref=f3e81]:
+      - link "Trails" [ref=f3e82] [cursor=pointer]:
+        - /url: /home
+      - link "Map" [ref=f3e87] [cursor=pointer]:
+        - /url: /map
+      - button "What's around you?" [ref=f3e92]
+      - link "Feed" [ref=f3e96] [cursor=pointer]:
+        - /url: /feed
+      - link "Profile" [ref=f3e101] [cursor=pointer]:
+        - /url: /profile
+  - button "About this design" [ref=f3e106]

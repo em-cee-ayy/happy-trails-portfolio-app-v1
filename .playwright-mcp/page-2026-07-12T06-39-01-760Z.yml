@@ -1,0 +1,56 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]: 🖥️
+    - button "Contact" [ref=e5] [cursor=pointer]
+    - button "Resume" [ref=e6] [cursor=pointer]
+    - generic [ref=e7]: 🎨 ▼
+  - generic [ref=e8]:
+    - generic [ref=e9]:
+      - generic [ref=e10]:
+        - generic [ref=e11]: 👋
+        - generic [ref=e12]: welcome
+      - generic [ref=e13]:
+        - button "Minimize" [ref=e14] [cursor=pointer]: _
+        - button "Maximize" [ref=e15] [cursor=pointer]: □
+        - button "Close" [ref=e16] [cursor=pointer]: ✕
+    - generic [ref=e18]:
+      - paragraph [ref=e19]:
+        - text: oh, hey! i'm
+        - link "Mariah" [ref=e20] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/mariahanderson
+        - text: "- welcome to my 100% vibe-coded portfolio!"
+      - paragraph [ref=e21]: "this project is a celebration of the early days of personal computing that made me fall in love with the internet: unpretentious self-expression, delightfully simple interactions, and joyful moments of discovery + play."
+      - paragraph [ref=e22]:
+        - text: "an intentional blend of retro interfaces, contemporary metaphors, and AI tools brought this experience to life. but the through-line is the thesis behind every project here:"
+        - strong [ref=e23]: i build products that treat cognitive state as a first-class input.
+        - text: every one runs the same loop — sense the user's state, classify it with AI, adapt the experience, feed the outcome back into the next decision. brainmode runs that loop at the interface layer, happy trails at the environment layer, and the phantom prd asks what we owe users when we run it at scale.
+      - paragraph [ref=e24]: "i'm a senior product engineer with a psychology degree, a ux/ui certification, and a habit of connecting them. at soci i lead company-wide ai training and ship internal ai products; outside work i build cognitive-state-aware products end to end — research → design system → api contract → shipped code. the throughline: i think in loops and second-order effects. if a design decision doesn't account for what it teaches the user to do next, it isn't finished."
+      - paragraph [ref=e25]:
+        - text: double-click
+        - strong [ref=e26]: work.explorer
+        - text: to see the case studies, or
+        - button "click here" [ref=e27] [cursor=pointer]
+        - text: . the desktop is yours! poke around the icons, play
+        - emphasis [ref=e28]: Spill the Beans
+        - text: ", run something through the"
+        - emphasis [ref=e29]: Brain Lab
+        - text: . i'm grateful you showed up here, and i hope you have fun <3333
+  - generic [ref=e31]:
+    - generic [ref=e32]:
+      - generic [ref=e33]: Friendly Tip
+      - button "x" [ref=e34] [cursor=pointer]
+    - generic [ref=e35]:
+      - generic [ref=e36]: 💾
+      - generic [ref=e37]:
+        - text: Psst! Check out
+        - button "work.explorer" [ref=e38] [cursor=pointer]
+        - text: for a more traditional portfolio view.
+    - generic [ref=e39]:
+      - button "OK" [ref=e40] [cursor=pointer]
+      - button "Cancel" [ref=e41] [cursor=pointer]
+  - generic [ref=e42]:
+    - button "start" [ref=e43] [cursor=pointer]
+    - button "👋 welcome" [ref=e50] [cursor=pointer]:
+      - generic [ref=e51]: 👋
+      - generic [ref=e52]: welcome
+    - generic [ref=e53]: 🔊

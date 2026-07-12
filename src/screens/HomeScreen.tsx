@@ -1,17 +1,11 @@
-import React, { useState } from "react";
-import { Search, Bell, Heart, Star, ChevronRight, Brain, Compass, TreePine, Mountain, Droplets } from "lucide-react";
-import { Trail } from "../types";
-import { TRAILS_DATA } from "../data";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Search, Bell, Heart, Star, ChevronRight, Compass, TreePine, Mountain, Droplets } from "lucide-react";
 
-interface HomeScreenProps {
-  onFindTrail: () => void;
-  onSelectTrail: (trailId: string) => void;
-}
-
-export const HomeScreen: React.FC<HomeScreenProps> = ({
-  onFindTrail,
-  onSelectTrail,
-}) => {
+export const HomeScreen = () => {
+  const navigate = useNavigate();
+  const onFindTrail = () => navigate("/check-in");
+  const onSelectTrail = (trailId: string) => navigate(`/trail/${trailId}`);
   const [selectedFilter, setSelectedFilter] = useState("Nearby");
 
   const filters = [
@@ -111,7 +105,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       <div className="grid grid-cols-2 gap-3 px-6 py-2">
         {/* Emerald Lake Loop */}
         <div
-          onClick={() => onSelectTrail("emerald_lake_loop")}
+          onClick={() => onSelectTrail("emerald_lake")}
           className="relative rounded-[20px] overflow-hidden shadow-xs hover:shadow-md cursor-pointer transition-all duration-300 flex flex-col group h-[160px]"
         >
           <img
@@ -146,7 +140,10 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         </div>
 
         {/* Sky Pond Trail */}
-        <div className="relative rounded-[20px] overflow-hidden shadow-xs hover:shadow-md cursor-pointer transition-all duration-300 flex flex-col group h-[160px]">
+        <div
+          onClick={() => onSelectTrail("sky_pond")}
+          className="relative rounded-[20px] overflow-hidden shadow-xs hover:shadow-md cursor-pointer transition-all duration-300 flex flex-col group h-[160px]"
+        >
           <img
             src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=500&q=80"
             alt="Sky Pond Trail"
@@ -184,7 +181,10 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
 
       <div className="px-6 flex flex-col gap-3">
         {/* Bear Lake Loop */}
-        <div className="p-3 bg-white rounded-2xl flex items-center gap-3 hover:shadow-xs transition duration-200">
+        <div
+          onClick={() => onSelectTrail("bear_lake")}
+          className="p-3 bg-white rounded-2xl flex items-center gap-3 hover:shadow-xs cursor-pointer transition duration-200"
+        >
           <img
             src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=150&q=80"
             alt="Bear Lake"
@@ -204,7 +204,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
 
         {/* Dream Lake */}
         <div
-          onClick={() => onSelectTrail("boulder_creek_trail")}
+          onClick={() => onSelectTrail("boulder_creek")}
           className="p-3 bg-white rounded-2xl flex items-center gap-3 hover:shadow-xs cursor-pointer transition duration-200"
         >
           <img

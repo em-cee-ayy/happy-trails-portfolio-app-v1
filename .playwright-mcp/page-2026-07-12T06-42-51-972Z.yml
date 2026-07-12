@@ -1,0 +1,21 @@
+- generic [ref=f3e3]:
+  - generic [ref=f3e109]:
+    - banner:
+      - button [ref=f3e111]
+      - generic: 00:30:21
+      - button [ref=f3e114]
+    - generic [ref=f3e118]:
+      - generic [ref=f3e119]:
+        - generic [ref=f3e120]: Time
+        - generic [ref=f3e121]: 30:21s
+      - generic [ref=f3e122]:
+        - generic [ref=f3e123]: Distance
+        - generic [ref=f3e124]: 3,44km
+      - generic [ref=f3e125]:
+        - generic [ref=f3e126]: Steps
+        - generic [ref=f3e127]: "3951"
+    - generic [ref=f3e128]:
+      - button "Pause" [ref=f3e129]
+      - button [ref=f3e130]
+      - button "Finish" [ref=f3e134]
+  - button "About this design" [ref=f3e106]
