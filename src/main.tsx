@@ -13,6 +13,9 @@ import { PostHikeScreen } from './screens/PostHikeScreen';
 import { InsightsScreen } from './screens/InsightsScreen';
 import { NoMatchScreen } from './screens/NoMatchScreen';
 import { ComponentsScreen } from './screens/ComponentsScreen';
+import { MapScreen } from './screens/MapScreen';
+import { FeedScreen } from './screens/FeedScreen';
+import { ProfileScreen } from './screens/ProfileScreen';
 import './index.css';
 
 const router = createBrowserRouter([
@@ -27,6 +30,9 @@ const router = createBrowserRouter([
       { path: '/trail/:id', element: <TrailDetailScreen /> },
       { path: '/hike/:id', element: <ActiveHikeScreen /> },
       { path: '/post-hike', element: <PostHikeScreen /> },
+      { path: '/map', element: <MapScreen /> },
+      { path: '/feed', element: <FeedScreen /> },
+      { path: '/profile', element: <ProfileScreen /> },
       { path: '/insights', element: <InsightsScreen /> },
       { path: '/no-match', element: <NoMatchScreen /> },
       { path: '/components', element: <ComponentsScreen /> },

@@ -4,35 +4,32 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A high-fidelity, click-through mobile UI mockup for "Happy Trails AI" — a nature trail recommendation app concept built around Attention Restoration Theory (ART). This is a **design/portfolio artifact**, not a production app with real data or backend logic: all trail data is hard-coded in `src/data.ts`, and screen transitions are driven entirely by local React state rather than routing. There is no real AI integration yet — `@google/genai`, `express`, and `dotenv` are scaffolded dependencies from the Google AI Studio template but are currently unused in `src/`.
-
-Originally scaffolded in Google AI Studio (see `metadata.json`, `.env.example` — env vars are injected by AI Studio at runtime, not read from a real `.env.local` in this repo's current state).
+A high-fidelity, click-through mobile UI mockup for "Happy Trails AI" — a nature trail recommendation app concept built around Attention Restoration Theory (ART). This is a **design/portfolio artifact**: all trail, feed, and profile data is hard-coded in `src/data.ts`, and the "AI matching" flow is a designed simulation (a timed processing screen plus a simple energy-threshold heuristic in `CheckInScreen`). There is no backend, no env vars, and no real AI integration.
 
 ## Commands
 
-- `npm run dev` — start Vite dev server on port 3000 (host `0.0.0.0`)
-- `npm run build` — production build via Vite
-- `npm run preview` — preview the production build
-- `npm run lint` — type-check only (`tsc --noEmit`); there is no separate lint/test runner configured
-- `npm run clean` — remove `dist` and `server.js`
+- `npm run dev` — Vite dev server on port 3000 (falls back to 3001+ if occupied)
+- `npm run build` — production build to `dist/`
+- `npm run preview` — serve the production build
+- `npm run lint` — type-check only (`tsc --noEmit`, strict); there is no separate lint/test runner
+- `npm run clean` — remove `dist`
 
-There is no test suite in this repo.
+There is no test suite. Deploys as a fully static SPA; `vercel.json` holds the rewrite so deep links resolve (Vercel preset "Vite", output `dist`).
 
 ## Architecture
 
-**Single-page, state-machine navigation.** [src/App.tsx](src/App.tsx) is the entire app shell: it owns one `activeScreen` state value (typed as `ScreenId` in [src/types.ts](src/types.ts)) and conditionally renders one of ~11 screen components based on it. There is no router — "navigation" is just calling `setActiveScreen(...)`. When adding a new screen, add its `ScreenId` variant, add the component under `src/components/`, wire a render branch in `App.tsx`, and add an entry to the "Direct Screen Preset Deck" navigator list in the same file.
+**Routing** ([src/main.tsx](src/main.tsx)): `react-router-dom` `createBrowserRouter` with [layouts/AppShell.tsx](src/layouts/AppShell.tsx) as the single layout route; every screen is a child route (`/`, `/home`, `/trail/:id`, `/hike/:id`, `/processing?trail=<id>`, `/map`, `/feed`, `/profile`, …; `*` redirects to `/`). Navigation state lives in the URL: the selected trail is the `:id` param (`TrailDetailScreen` looks it up in `TRAILS_DATA` and redirects unknown ids to `/no-match`), and `ProcessingScreen` reads `?trail=` then `navigate(..., { replace: true })`s to the detail screen after a mock delay. When adding a screen: create it under `src/screens/`, register the route in `main.tsx`, and add a link to `SCREEN_LINKS` in `SpecSidebar`.
 
-**Split-view layout.** `App.tsx` renders two panes side by side on large screens (stacked on mobile): a left "Design Specification" sidebar (scholarly context about ART + a manual screen navigator for jumping directly to any screen during development/demo), and a right pane containing a fixed `393×852` device frame that renders the actual mockup screens. Only the right-hand device frame represents the "real" app UI; the left pane is presentation/portfolio scaffolding and should generally not be touched when working on app screens themselves.
+**Shell vs screens.** `AppShell` renders the two-pane presentation: a "Design Specification" sidebar ([components/SpecSidebar.tsx](src/components/SpecSidebar.tsx) — portfolio context + a navigator linking to every screen) and the app viewport ([components/DeviceFrame.tsx](src/components/DeviceFrame.tsx)). The shell owns the camera-sheet open state and decides bottom-nav visibility per route (`NAV_HIDDEN_PATHS` + `/hike/*`). Screens under `src/screens/` are self-contained: they use router hooks (`useNavigate`/`useParams`) directly rather than receiving navigation props.
 
-**Shared app-level state lives in `App.tsx`**, not in the screens: `selectedTrail`, `isCameraSheetOpen`, and the live clock (`timeStr`) are all lifted to the top and passed down as props/handlers. Screens are largely presentational and receive callbacks like `onNext`, `onBack`, `onStartHike`, `onSubmit` rather than managing cross-screen state themselves.
+**Responsive model:** on `lg+` the app renders inside a fixed 393×852 device frame (height clamped to the viewport) beside the sidebar; below `lg` the app IS the viewport and the sidebar becomes a full-screen drawer behind the floating "About this design" toggle (in `AppShell`).
 
-**Data model** ([src/types.ts](src/types.ts), [src/data.ts](src/data.ts)): `Trail` objects carry a `matchScore`, `isRestorative` flag, and an array of `ArtDimension` scores (`being away`, `fascination`, `extent`, `compatibility` — the four ART dimensions), each with a 0–100 `score` and human-readable `explanation`. `CognitiveState` models the user's self-reported mental state options shown on the check-in screen. `TRAILS_DATA[0]` (Boulder Creek, low-exertion) and `TRAILS_DATA[1]` (Sky Pond, high-exertion) are deliberately contrasted so the check-in → processing → trail-detail flow can demo different match outcomes: `handleCheckInSubmit` in `App.tsx` picks a trail based on the reported cognitive state (`"wired"` → Sky Pond, everything else → Boulder Creek) purely as a mockup heuristic, not real matching logic.
+**Scroll/overlay contract:** `DeviceFrame` is the positioning context. `AppShell` puts screens in an `absolute inset-0 overflow-y-auto` wrapper; `BottomNav` and `CameraSheet` are siblings pinned to the frame, so they don't scroll with content. Consequences: screens size themselves with `h-full` and scroll internally; screens visible alongside the nav need `pb-24`-ish clearance; pinned CTA bars use `absolute bottom-16` (not `bottom-0`) so the 64px bottom nav doesn't cover them. Don't make a screen's root a `flex flex-col` if the root itself is the scroll container — flex compresses children instead of overflowing (this bug clipped the Home check-in card once already; see the comment in `HomeScreen`).
 
-**Screens** (`src/components/`): `OnboardingScreens.tsx` holds two onboarding steps in one file; the rest are one screen per file (`HomeScreen`, `CheckInScreen`, `ProcessingScreen`, `TrailDetailScreen`, `ActiveHikeScreen`, `PostHikeScreen`, `ComponentsScreen`). `MiscScreens.tsx` bundles `InsightsScreen` and `NoMatchScreen`. `ComponentsScreen` is a living style/component reference sheet, not part of the user-facing flow.
+**Data model** ([src/types.ts](src/types.ts), [src/data.ts](src/data.ts)): `Trail` carries the four ART dimension scores with explanations, a `matchScore`, `isRestorative`, a `category` (drives Home's filter chips), and `mapPos` (percentage coordinates for pins on `MapScreen`'s stylized SVG map). `FEED_ITEMS` and `PROFILE_STATS` feed the Feed and Profile screens. `TRAILS_DATA[0]` (boulder_creek, low-exertion, high match) and `[1]` (sky_pond, high-exertion, low match) are deliberately contrasted so the check-in flow can demo both outcomes. Every trail card anywhere in the app must reference a real `TRAILS_DATA` id — screens render cards from this data, never hard-coded copies.
 
 ## Styling conventions
 
-- Tailwind v4 via `@tailwindcss/vite` (no `tailwind.config.js` — theme is defined inline in [src/index.css](src/index.css) using the `@theme` directive).
-- Custom CSS variables for the palette (`--color-forest`, `--color-paper`, `--color-pine`, `--color-art-comp`, per-ART-dimension colors, etc.) and fonts (`--font-sans` = Inter, `--font-serif` = Playfair Display, `--font-mono` = JetBrains Mono) are declared there — reference them via `var(--color-*)` or Tailwind arbitrary-value classes like `bg-[var(--color-forest)]`, not raw hex, when touching shared chrome. Screen-local one-off colors are frequently hard-coded as hex (e.g. `#2B4A35`) directly in component classNames instead — match whichever convention the surrounding component already uses rather than mixing both in the same file.
-- `lucide-react` for icons, `motion` (Framer Motion successor) is available for animation.
-- The `@/*` path alias maps to the repo root (see `tsconfig.json` / `vite.config.ts`).
+- Tailwind v4 via `@tailwindcss/vite`; no `tailwind.config.js` — theme (palette + Inter/Playfair Display/JetBrains Mono fonts) is declared with `@theme` in [src/index.css](src/index.css).
+- Shared chrome uses `var(--color-*)` arbitrary-value classes (e.g. `bg-[var(--color-paper)]`); some screens (Home, camera sheet) use raw hex like `#2B4A35` instead. Match whichever convention the surrounding file already uses; the IDE's "canonical class" suggestions (`bg-paper`, `h-40`, …) are deliberately not followed to keep files internally consistent.
+- `lucide-react` for icons. The `@/*` alias maps to `./src/*` but imports are currently all relative.
