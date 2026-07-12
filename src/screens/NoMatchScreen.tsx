@@ -13,7 +13,9 @@ export function NoMatchScreen() {
         </button>
       </header>
 
-      <div className="flex-1 flex flex-col items-center justify-center p-6 text-center">
+      {/* top-aligned with a slight cushion (pt-8) so content sits near the top
+          and Expand Radius follows the block instead of hugging the nav */}
+      <div className="flex-1 flex flex-col items-center px-6 pt-8 pb-24 text-center">
         <div className="w-16 h-16 rounded-full bg-[var(--color-alert)]/10 flex items-center justify-center mb-6">
           <span className="text-[24px]">🧭</span>
         </div>

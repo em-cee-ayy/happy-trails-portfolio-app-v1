@@ -54,12 +54,13 @@ export function MapScreen() {
           <ellipse cx="248" cy="152" rx="26" ry="14" fill="#7BA3C4" fillOpacity="0.5" />
           <ellipse cx="296" cy="352" rx="20" ry="11" fill="#7BA3C4" fillOpacity="0.5" />
 
-          {/* dashed trail routes */}
+          {/* dashed trail routes: each starts at a pin (mapPos) and flows
+              smoothly off a distinct edge, like trails continuing past the map */}
           <g fill="none" stroke="#2E5D4B" strokeOpacity="0.55" strokeWidth="2.5" strokeDasharray="6 5" strokeLinecap="round">
-            <path d="M 110 580 Q 120 500 105 435" />
-            <path d="M 244 140 Q 230 190 250 240 T 235 330" />
-            <path d="M 180 245 Q 210 280 250 300 T 296 340" />
-            <path d="M 290 460 Q 300 420 296 365" />
+            <path d="M 110 435 C 100 510, 130 565, 96 660" />
+            <path d="M 181 243 C 140 278, 85 288, -10 268" />
+            <path d="M 244 141 C 236 90, 220 45, 262 -14" />
+            <path d="M 291 346 C 326 408, 300 486, 352 600" />
           </g>
 
           {/* tree marks */}

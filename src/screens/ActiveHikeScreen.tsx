@@ -1,130 +1,141 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Download, Lock } from "lucide-react";
+import { ArrowLeft, Navigation, Lock } from "lucide-react";
+
+// Single smooth route curve (reused for the white casing + pine core) so the
+// trail reads like a real map line rather than rough squiggles.
+const ROUTE =
+  "M 120 -20 C 150 110, 70 180, 130 280 C 175 360, 250 380, 232 470 C 216 550, 130 590, 175 690 C 210 770, 300 800, 285 900";
 
 export function ActiveHikeScreen() {
   const navigate = useNavigate();
   const onFinish = () => navigate("/post-hike");
-  const [seconds, setSeconds] = useState(1821); // Starts at 00:30:21
+  const [seconds, setSeconds] = useState(1821); // starts at 00:30:21
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds(s => s + 1);
-    }, 1000);
+    const interval = setInterval(() => setSeconds((s) => s + 1), 1000);
     return () => clearInterval(interval);
   }, []);
 
-  const formatTime = (totalSeconds: number) => {
-    const h = Math.floor(totalSeconds / 3600);
-    const m = Math.floor((totalSeconds % 3600) / 60);
-    const s = totalSeconds % 60;
-    if (h > 0) {
-      return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-    }
-    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-  };
+  const pad = (n: number) => n.toString().padStart(2, "0");
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = seconds % 60;
+  const headerTime = `${pad(h)}:${pad(m)}:${pad(s)}`;
+  const statTime = h > 0 ? `${pad(h)}:${pad(m)}:${pad(s)}` : `${pad(m)}:${pad(s)}`;
 
-  const formatTimeHeader = (totalSeconds: number) => {
-    const h = Math.floor(totalSeconds / 3600);
-    const m = Math.floor((totalSeconds % 3600) / 60);
-    const s = totalSeconds % 60;
-    return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-  };
+  const stats = [
+    { label: "Time", value: statTime },
+    { label: "Distance", value: "3.44", unit: "km" },
+    { label: "Steps", value: "3,951" },
+  ];
 
   return (
-    <div className="flex flex-col h-full bg-[#E5EFE7] relative overflow-hidden font-sans">
-      {/* Topo Map Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        {/* Synthetic Topo Lines generated with SVG */}
-        <svg className="w-[150%] h-[150%] absolute -top-1/4 -left-1/4 stroke-[#C2CCDC]/50 pointer-events-none" fill="none" strokeWidth="2">
-          {/* Several overlapping wavy paths to simulate topo */}
-          <path d="M 0 200 Q 150 150 300 300 T 600 400 T 900 200 T 1200 400" />
-          <path d="M 0 250 Q 160 190 320 330 T 620 420 T 920 230 T 1200 450" />
-          <path d="M 0 300 Q 170 230 340 360 T 640 440 T 940 260 T 1200 500" />
-          
-          <path d="M 0 400 Q 100 350 200 450 T 400 500 T 700 300 T 1000 600 T 1200 550" />
-          <path d="M 0 450 Q 110 390 220 480 T 420 520 T 720 330 T 1020 620 T 1200 600" />
-          <path d="M 0 500 Q 120 430 240 510 T 440 540 T 740 360 T 1040 640 T 1200 650" />
+    <div className="flex flex-col h-full bg-[var(--color-paper-deep)] relative overflow-hidden font-sans">
+      {/* Trail map background (design-system palette + smooth route) */}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        viewBox="0 0 393 852"
+        preserveAspectRatio="xMidYMid slice"
+        aria-hidden="true"
+      >
+        <defs>
+          <radialGradient id="hikeCone" cx="50%" cy="0%" r="90%">
+            <stop offset="0%" stopColor="#2E5D4B" stopOpacity="0.35" />
+            <stop offset="100%" stopColor="#2E5D4B" stopOpacity="0" />
+          </radialGradient>
+        </defs>
 
-          <path d="M 200 0 Q 300 200 150 400 T 250 600 T 100 800 T 300 1000" />
-          <path d="M 250 0 Q 350 220 180 430 T 280 620 T 130 820 T 330 1020" />
-          <path d="M 300 0 Q 400 240 210 460 T 310 640 T 160 840 T 360 1040" />
-          
-          {/* Circular topo near the blue dot to simulate elevation */}
-          <circle cx="270" cy="400" r="100" />
-          <circle cx="270" cy="400" r="150" />
-          <circle cx="270" cy="400" r="200" />
-          <circle cx="270" cy="400" r="250" />
-          <circle cx="270" cy="400" r="300" />
-        </svg>
+        <rect width="393" height="852" fill="#EAE2D0" />
 
-        {/* Thick Black Route SVG */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 393 852" preserveAspectRatio="none">
-          {/* Main route line matching the screenshot roughly */}
-          <path 
-            d="M -10 120 Q 80 120 90 200 T 50 300 T 100 350 Q 120 320 180 260 T 300 260 T 320 400 T 250 430 T 220 540 T 280 640 T 350 660 T 400 630" 
-            fill="none" 
-            stroke="#0C130D" 
-            strokeWidth="12" 
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        {/* contour lines */}
+        <g fill="none" stroke="#1E3A2F" strokeOpacity="0.1" strokeWidth="1.5">
+          <path d="M -20 160 Q 110 90 240 150 T 460 130" />
+          <path d="M -20 210 Q 120 130 250 195 T 460 175" />
+          <path d="M -20 260 Q 130 175 260 240 T 460 225" />
+          <ellipse cx="300" cy="250" rx="70" ry="42" />
+          <ellipse cx="300" cy="250" rx="108" ry="66" />
+          <ellipse cx="300" cy="250" rx="150" ry="92" />
+          <path d="M -20 620 Q 100 560 210 620 T 460 600" />
+          <path d="M -20 670 Q 110 600 220 660 T 460 650" />
+          <ellipse cx="90" cy="740" rx="80" ry="46" />
+          <ellipse cx="90" cy="740" rx="120" ry="72" />
+        </g>
 
-        {/* You Are Here Indicator */}
-        <div className="absolute top-[430px] left-[250px] -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center justify-center pointer-events-none">
-          {/* Vision Cone (Gradient) */}
-          <div className="absolute -top-[50px] -right-[40px] w-24 h-24 bg-gradient-to-tr from-[#1A66FF]/60 to-transparent blur-[6px] transform rotate-[35deg] origin-bottom-left" style={{ clipPath: "polygon(0 100%, 100% 0, 100% 100%)"}} />
-          
-          {/* Blue Dot with White Border */}
-          <div className="w-[26px] h-[26px] bg-[#1A66FF] rounded-full border-[3px] border-white shadow-[0_2px_8px_rgba(0,0,0,0.15)] relative z-10" />
-        </div>
-      </div>
+        {/* water */}
+        <path
+          d="M -10 700 Q 70 730 130 800 T 300 860"
+          fill="none"
+          stroke="#7BA3C4"
+          strokeOpacity="0.5"
+          strokeWidth="9"
+          strokeLinecap="round"
+        />
 
-      {/* Top Header UI */}
-      <header className="px-6 pt-14 pb-4 flex items-center justify-between z-10 relative pointer-events-none">
-        <button onClick={onFinish} className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-black shadow-sm pointer-events-auto active:scale-95 transition-transform">
-          <ArrowLeft size={22} strokeWidth={2} />
+        {/* route: white casing under a pine core (map-line look) */}
+        <path d={ROUTE} fill="none" stroke="#FFFFFF" strokeOpacity="0.9" strokeWidth="13" strokeLinecap="round" />
+        <path d={ROUTE} fill="none" stroke="#2E5D4B" strokeWidth="6" strokeLinecap="round" />
+
+        {/* heading cone + current-position dot */}
+        <path d="M 232 470 L 150 585 L 258 600 Z" fill="url(#hikeCone)" />
+        <circle cx="232" cy="470" r="12" fill="#FFFFFF" />
+        <circle cx="232" cy="470" r="8" fill="#1E3A2F" />
+      </svg>
+
+      {/* Header */}
+      <header className="px-5 pt-12 pb-4 flex items-center justify-between z-10 relative">
+        <button
+          onClick={onFinish}
+          aria-label="Back"
+          className="w-11 h-11 rounded-full bg-white flex items-center justify-center text-[var(--color-forest)] shadow-md active:scale-95 transition-transform"
+        >
+          <ArrowLeft size={20} strokeWidth={2} />
         </button>
-        
-        <div className="text-[19px] font-medium tracking-tight text-black">
-          {formatTimeHeader(seconds)}
+        <div className="px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-sm shadow-md">
+          <span className="font-mono tabular-nums text-[17px] font-semibold text-[var(--color-forest)]">{headerTime}</span>
         </div>
-
-        <button className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-black shadow-sm pointer-events-auto active:scale-95 transition-transform">
-          <Download size={20} strokeWidth={2} />
+        <button
+          aria-label="Recenter"
+          className="w-11 h-11 rounded-full bg-white flex items-center justify-center text-[var(--color-forest)] shadow-md active:scale-95 transition-transform"
+        >
+          <Navigation size={18} strokeWidth={2} />
         </button>
       </header>
 
-      {/* Stats Floating Dashboard */}
-      <div className="absolute left-6 top-[400px] bg-[#0C130D] rounded-[32px] p-6 w-[120px] shadow-lg flex flex-col gap-5 z-20 pointer-events-auto">
-        <div className="flex flex-col gap-1">
-          <span className="text-[#C1CD44] text-[13px] font-medium tracking-wide">Time</span>
-          <span className="text-white text-[19px] font-semibold">{formatTime(seconds)}<span className="text-white/70 text-[14px]">s</span></span>
+      <div className="flex-1" />
+
+      {/* Stats + actions dock */}
+      <div className="relative z-10 p-5 space-y-3">
+        <div className="bg-[var(--color-forest)] rounded-2xl px-5 py-4 grid grid-cols-3 gap-2 shadow-lg">
+          {stats.map((stat) => (
+            <div key={stat.label} className="flex flex-col gap-1.5">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-art-comp)]">{stat.label}</span>
+              <span className="text-white text-[19px] font-mono tabular-nums leading-none">
+                {stat.value}
+                {stat.unit && <span className="text-white/60 text-[13px] ml-0.5">{stat.unit}</span>}
+              </span>
+            </div>
+          ))}
         </div>
-        <div className="flex flex-col gap-1">
-          <span className="text-[#C1CD44] text-[13px] font-medium tracking-wide">Distance</span>
-          <span className="text-white text-[19px] font-semibold">3,44<span className="text-white/70 text-[14px] ml-0.5">km</span></span>
-        </div>
-        <div className="flex flex-col gap-1">
-          <span className="text-[#C1CD44] text-[13px] font-medium tracking-wide">Steps</span>
-          <span className="text-white text-[19px] font-semibold">3951</span>
+
+        <div className="flex items-center gap-3">
+          <button className="flex-1 h-14 bg-white rounded-2xl text-[var(--color-forest)] font-bold text-[15px] shadow-md active:scale-95 transition-transform">
+            Pause
+          </button>
+          <button
+            aria-label="Lock screen"
+            className="w-14 h-14 bg-white rounded-full flex items-center justify-center text-[var(--color-forest)] shrink-0 shadow-md active:scale-95 transition-transform"
+          >
+            <Lock size={20} strokeWidth={2} />
+          </button>
+          <button
+            onClick={onFinish}
+            className="flex-1 h-14 bg-[var(--color-pine)] rounded-2xl text-white font-bold text-[15px] shadow-md active:scale-95 transition-transform"
+          >
+            Finish
+          </button>
         </div>
       </div>
-
-      {/* Bottom Actions Menu */}
-      <div className="absolute bottom-10 left-6 right-6 flex items-center justify-between gap-4 z-20 pointer-events-auto">
-        <button className="flex-1 h-16 bg-white rounded-3xl text-black font-bold text-[18px] shadow-sm active:scale-95 transition-transform">
-          Pause
-        </button>
-        <button className="w-16 h-16 bg-[#000000]/30 backdrop-blur-md rounded-full flex items-center justify-center text-white shrink-0 shadow-sm active:scale-95 transition-transform">
-          <Lock size={22} strokeWidth={2.5} />
-        </button>
-        <button onClick={onFinish} className="flex-1 h-16 bg-white rounded-3xl text-black font-bold text-[18px] shadow-sm active:scale-95 transition-transform">
-          Finish
-        </button>
-      </div>
-
     </div>
   );
 }

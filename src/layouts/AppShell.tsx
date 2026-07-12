@@ -30,7 +30,7 @@ export function AppShell() {
       </div>
 
       {/* RIGHT PREVIEW: full viewport on mobile, framed device on desktop */}
-      <div className="flex-1 flex items-center justify-center lg:p-10">
+      <div className="flex-1 flex items-center justify-center lg:px-10 lg:py-5">
         <DeviceFrame>
           {/* Scrollable screen viewport */}
           <div className="absolute inset-0 overflow-y-auto overflow-x-hidden">

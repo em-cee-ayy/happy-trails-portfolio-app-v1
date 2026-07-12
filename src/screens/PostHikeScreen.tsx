@@ -19,7 +19,8 @@ export function PostHikeScreen() {
         <h1 className="font-serif italic text-lg text-[var(--color-forest)] ml-2">reflection</h1>
       </header>
 
-      <div className="flex-1 overflow-y-auto p-4 pb-28">
+      {/* pb-48 keeps the last field clear of the pinned Save & Return bar */}
+      <div className="flex-1 overflow-y-auto p-4 pb-48">
         <div className="mb-6 space-y-2">
           <h2 className="text-[22px] font-serif text-[var(--color-forest)] leading-tight">How was the trail?</h2>
           <p className="text-[14px] text-[var(--color-forest)]/60 font-sans leading-relaxed">
