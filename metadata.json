@@ -1,0 +1,6 @@
+{
+  "name": "Happy Trails AI",
+  "description": "High-fidelity mobile UI mockup for a nature trail recommendation app powered by Attention Restoration Theory (ART).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
