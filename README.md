@@ -1,4 +1,4 @@
-#🥾 Happy Trails Interactive Portfolio App
+## 🥾 Happy Trails Interactive Portfolio App
 
 **trail recommendations that read your nervous system, not just your fitness level**
 
