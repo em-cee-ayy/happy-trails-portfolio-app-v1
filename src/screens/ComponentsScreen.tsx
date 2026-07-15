@@ -1,19 +1,15 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ChevronLeft, Heart } from "lucide-react";
+import { Heart } from "lucide-react";
+import { BackButton } from "../components/BackButton";
 
 export function ComponentsScreen() {
-  const navigate = useNavigate();
-  const onBack = () => navigate("/home");
   const [sliderVal, setSliderVal] = useState(3.0);
 
   return (
     <div className="flex flex-col h-full bg-[var(--color-paper)] relative">
-      <header className="px-4 pt-10 pb-4 flex items-center border-b border-[var(--color-forest)]/10 bg-[var(--color-paper)]/80 backdrop-blur-md sticky top-0 z-10">
-        <button onClick={onBack} className="p-2 -ml-2 text-[var(--color-forest)]">
-          <ChevronLeft size={24} strokeWidth={1.5} />
-        </button>
-        <h1 className="font-serif italic text-lg text-[var(--color-forest)] ml-2">components spec</h1>
+      <header className="px-4 pt-10 pb-4 flex items-center gap-2 border-b border-[var(--color-forest)]/10 bg-[var(--color-paper)]/80 backdrop-blur-md sticky top-0 z-10">
+        <BackButton to="/home" />
+        <h1 className="font-serif italic text-lg text-[var(--color-forest)]">components spec</h1>
       </header>
 
       <div className="flex-1 p-4 pb-28 space-y-12">

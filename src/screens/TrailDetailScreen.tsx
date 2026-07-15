@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { ChevronLeft, Share, MapPin, Heart } from "lucide-react";
+import { Share, MapPin, Heart } from "lucide-react";
 import { TRAILS_DATA } from "../data";
+import { BackButton } from "../components/BackButton";
 
 export function TrailDetailScreen() {
   const navigate = useNavigate();
@@ -16,9 +17,7 @@ export function TrailDetailScreen() {
   return (
     <div className="flex flex-col h-full bg-[var(--color-paper)] relative">
       <header className="absolute top-0 left-0 right-0 p-4 flex items-center justify-between z-10">
-        <button onClick={() => navigate("/home")} className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/20">
-          <ChevronLeft size={20} strokeWidth={2} className="-ml-0.5" />
-        </button>
+        <BackButton to="/home" variant="overlay" />
         <div className="flex gap-2">
           <button className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/20">
             <Share size={18} strokeWidth={2} />

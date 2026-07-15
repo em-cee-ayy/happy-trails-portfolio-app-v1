@@ -19,7 +19,10 @@ export function AppShell() {
     setIsCameraSheetOpen(false);
   }, [pathname]);
 
-  const hideNav = NAV_HIDDEN_PATHS.includes(pathname) || pathname.startsWith("/hike/");
+  // The Happy Trails handoff build is a self-contained sub-app: its screens render
+  // their own status bar, tab bar, and scan sheet, so the suite chrome steps aside.
+  const isHandoff = pathname.startsWith("/ht");
+  const hideNav = isHandoff || NAV_HIDDEN_PATHS.includes(pathname) || pathname.startsWith("/hike/");
 
   return (
     <div className="w-full min-h-[100dvh] bg-[var(--color-paper)] font-sans antialiased flex text-[var(--color-forest)]">
@@ -37,7 +40,7 @@ export function AppShell() {
             <Outlet />
           </div>
 
-          {isCameraSheetOpen && <CameraSheet onClose={() => setIsCameraSheetOpen(false)} />}
+          {isCameraSheetOpen && !isHandoff && <CameraSheet onClose={() => setIsCameraSheetOpen(false)} />}
 
           {!hideNav && <BottomNav onCameraClick={() => setIsCameraSheetOpen((open) => !open)} />}
         </DeviceFrame>

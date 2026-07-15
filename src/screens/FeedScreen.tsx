@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Heart, TrendingDown, TrendingUp } from "lucide-react";
+import { Heart, Plus, TrendingDown, TrendingUp } from "lucide-react";
 import { FEED_ITEMS, TRAILS_DATA } from "../data";
+import { BackButton } from "../components/BackButton";
 
 export function FeedScreen() {
   const [kudosed, setKudosed] = useState<Record<string, boolean>>({});
@@ -12,10 +13,18 @@ export function FeedScreen() {
   return (
     <div className="flex flex-col h-full bg-[var(--color-paper)] relative">
       <header className="px-4 pt-10 pb-4 flex items-center justify-between border-b border-[var(--color-forest)]/10 bg-[var(--color-paper)]/80 backdrop-blur-md sticky top-0 z-10">
-        <h1 className="font-serif italic text-lg text-[var(--color-forest)]">community feed</h1>
-        <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-forest)]/50">
-          restoration stories
-        </span>
+        <div className="flex items-center gap-2">
+          <BackButton to="/home" />
+          <h1 className="font-serif italic text-lg text-[var(--color-forest)]">
+            community feed
+          </h1>
+        </div>
+        <button
+          aria-label="Add a reflection"
+          className="w-10 h-10 rounded-full bg-[var(--color-pine)] text-white flex items-center justify-center shadow-sm active:scale-95 transition-transform"
+        >
+          <Plus size={20} strokeWidth={2} />
+        </button>
       </header>
 
       <div className="flex-1 overflow-y-auto p-4 pb-24 space-y-4">
@@ -37,11 +46,16 @@ export function FeedScreen() {
                   referrerPolicy="no-referrer"
                 />
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-bold text-[#2B4A35] leading-tight">{item.userName}</p>
+                  <p className="text-sm font-bold text-[#2B4A35] leading-tight">
+                    {item.userName}
+                  </p>
                   <p className="text-[11px] text-[#2B4A35]/60 truncate">
                     hiked{" "}
                     {trail ? (
-                      <Link to={`/trail/${trail.id}`} className="font-semibold underline decoration-[var(--color-art-comp)]/60 underline-offset-2">
+                      <Link
+                        to={`/trail/${trail.id}`}
+                        className="font-semibold underline decoration-[var(--color-art-comp)]/60 underline-offset-2"
+                      >
                         {trail.name}
                       </Link>
                     ) : (
@@ -57,8 +71,13 @@ export function FeedScreen() {
                       : "bg-[var(--color-alert)]/10 text-[var(--color-alert)]"
                   }`}
                 >
-                  {positive ? <TrendingUp size={11} /> : <TrendingDown size={11} />}
-                  {positive ? "+" : ""}{item.restorationDelta} restoration
+                  {positive ? (
+                    <TrendingUp size={11} />
+                  ) : (
+                    <TrendingDown size={11} />
+                  )}
+                  {positive ? "+" : ""}
+                  {item.restorationDelta} restoration
                 </span>
               </div>
 
@@ -78,11 +97,18 @@ export function FeedScreen() {
                 <button
                   onClick={() => toggleKudos(item.id)}
                   className={`flex items-center gap-1.5 text-xs font-bold transition ${
-                    hasKudos ? "text-[var(--color-compat)]" : "text-[#2B4A35]/50 hover:text-[#2B4A35]/70"
+                    hasKudos
+                      ? "text-[var(--color-compat)]"
+                      : "text-[#2B4A35]/50 hover:text-[#2B4A35]/70"
                   }`}
                 >
-                  <Heart size={14} fill={hasKudos ? "currentColor" : "transparent"} />
-                  <span className="tabular-nums">{item.kudos + (hasKudos ? 1 : 0)} kudos</span>
+                  <Heart
+                    size={14}
+                    fill={hasKudos ? "currentColor" : "transparent"}
+                  />
+                  <span className="tabular-nums">
+                    {item.kudos + (hasKudos ? 1 : 0)} kudos
+                  </span>
                 </button>
               </div>
             </article>
@@ -90,7 +116,7 @@ export function FeedScreen() {
         })}
 
         <p className="text-center text-[11px] text-[var(--color-forest)]/40 italic pt-2">
-          you're all caught up — go touch some moss 🌿
+          you're all caught up, now go touch some moss 🌿
         </p>
       </div>
     </div>

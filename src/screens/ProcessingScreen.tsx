@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { BackButton } from "../components/BackButton";
 
 export function ProcessingScreen() {
   const navigate = useNavigate();
@@ -25,6 +26,9 @@ export function ProcessingScreen() {
 
   return (
     <div className="flex flex-col h-full bg-[var(--color-forest)] text-[var(--color-paper)] relative justify-center p-6">
+      <div className="absolute top-0 left-0 p-4 z-10">
+        <BackButton to="/home" variant="overlay" />
+      </div>
       <div className="space-y-6">
         <h2 className="text-[22px] font-serif italic text-[var(--color-paper)]">analyzing cognitive state{dots}</h2>
 

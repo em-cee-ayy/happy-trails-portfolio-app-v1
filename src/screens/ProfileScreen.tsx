@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Brain, ChevronRight, Flame, Star } from "lucide-react";
 import { PROFILE_STATS, TRAILS_DATA } from "../data";
+import { BackButton } from "../components/BackButton";
 
 export function ProfileScreen() {
   const stats = [
@@ -13,8 +14,11 @@ export function ProfileScreen() {
   return (
     <div className="flex flex-col h-full bg-[var(--color-paper)] relative">
       <header className="px-4 pt-10 pb-4 flex items-center justify-between border-b border-[var(--color-forest)]/10 bg-[var(--color-paper)]/80 backdrop-blur-md sticky top-0 z-10">
-        <h1 className="font-serif italic text-lg text-[var(--color-forest)]">profile</h1>
-        <span className="flex items-center gap-1 px-2 py-1 rounded-full bg-[var(--color-art-comp)]/15 text-[var(--color-art-comp)] text-[10px] font-bold">
+        <div className="flex items-center gap-2">
+          <BackButton to="/home" />
+          <h1 className="font-serif italic text-lg text-[var(--color-forest)]">profile</h1>
+        </div>
+        <span className="flex items-center gap-1 px-2 py-1 rounded-full bg-[var(--color-art-comp)]/15 text-[var(--color-art-comp)] text-[10px] font-bold shrink-0">
           <Flame size={11} />
           {PROFILE_STATS.streakWeeks}-week streak
         </span>
@@ -37,15 +41,16 @@ export function ProfileScreen() {
           </div>
         </div>
 
-        {/* Stats grid */}
-        <div className="grid grid-cols-4 gap-2">
+        {/* Stats grid — 2 columns give each figure room so values never
+            overflow; values clip with ellipsis and labels wrap if longer. */}
+        <div className="grid grid-cols-2 gap-3">
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="bg-[var(--color-paper-deep)] rounded-[12px] border border-[var(--color-forest)]/10 p-3 text-center"
+              className="bg-[var(--color-paper-deep)] rounded-[12px] border border-[var(--color-forest)]/10 p-3.5 min-w-0"
             >
-              <p className="font-mono tabular-nums text-[17px] text-[var(--color-forest)] leading-tight">{stat.value}</p>
-              <p className="text-[9px] uppercase tracking-wider font-bold text-[var(--color-forest)]/55 mt-1 leading-tight">{stat.label}</p>
+              <p className="font-mono tabular-nums text-[18px] text-[var(--color-forest)] leading-none truncate">{stat.value}</p>
+              <p className="text-[10px] uppercase tracking-wide font-bold text-[var(--color-forest)]/55 mt-1.5 leading-snug">{stat.label}</p>
             </div>
           ))}
         </div>

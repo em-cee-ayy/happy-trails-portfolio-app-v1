@@ -16,6 +16,11 @@ import { ComponentsScreen } from './screens/ComponentsScreen';
 import { MapScreen } from './screens/MapScreen';
 import { FeedScreen } from './screens/FeedScreen';
 import { ProfileScreen } from './screens/ProfileScreen';
+// Happy Trails AI — handoff build (featured interactive mockup)
+import { HTOnboarding, HTProfile, HTSocial } from './happytrails/ProfileScreen';
+import { HTHome } from './happytrails/HomeScreen';
+import { HTTrailDetail, HTLiveHike } from './happytrails/TrailScreen';
+import { HTCommunityAlerts, HTBirdID, HTParking } from './happytrails/AiScreen';
 import './index.css';
 
 const router = createBrowserRouter([
@@ -36,6 +41,17 @@ const router = createBrowserRouter([
       { path: '/insights', element: <InsightsScreen /> },
       { path: '/no-match', element: <NoMatchScreen /> },
       { path: '/components', element: <ComponentsScreen /> },
+      // Happy Trails AI — handoff build
+      { path: '/ht', element: <Navigate to="/ht/home" replace /> },
+      { path: '/ht/onboarding', element: <HTOnboarding /> },
+      { path: '/ht/home', element: <HTHome /> },
+      { path: '/ht/trail/:id', element: <HTTrailDetail /> },
+      { path: '/ht/live', element: <HTLiveHike /> },
+      { path: '/ht/alerts', element: <HTCommunityAlerts /> },
+      { path: '/ht/bird', element: <HTBirdID /> },
+      { path: '/ht/parking', element: <HTParking /> },
+      { path: '/ht/social', element: <HTSocial /> },
+      { path: '/ht/profile', element: <HTProfile /> },
       { path: '*', element: <Navigate to="/" replace /> },
     ],
   },

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Navigation, Lock } from "lucide-react";
+import { Navigation, Lock } from "lucide-react";
+import { BackButton } from "../components/BackButton";
 
 // Single smooth route curve (reused for the white casing + pine core) so the
 // trail reads like a real map line rather than rough squiggles.
@@ -84,13 +85,7 @@ export function ActiveHikeScreen() {
 
       {/* Header */}
       <header className="px-5 pt-12 pb-4 flex items-center justify-between z-10 relative">
-        <button
-          onClick={onFinish}
-          aria-label="Back"
-          className="w-11 h-11 rounded-full bg-white flex items-center justify-center text-[var(--color-forest)] shadow-md active:scale-95 transition-transform"
-        >
-          <ArrowLeft size={20} strokeWidth={2} />
-        </button>
+        <BackButton to="/home" />
         <div className="px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-sm shadow-md">
           <span className="font-mono tabular-nums text-[17px] font-semibold text-[var(--color-forest)]">{headerTime}</span>
         </div>

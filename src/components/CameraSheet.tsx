@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { Activity, Camera, ChevronLeft, ShieldAlert, Volume2 } from "lucide-react";
+import {
+  Activity,
+  Camera,
+  ChevronLeft,
+  ShieldAlert,
+  Volume2,
+} from "lucide-react";
 
 type OptionId = "listen" | "capture" | "alert" | "parking";
 
@@ -25,7 +31,8 @@ const OPTIONS: SheetOption[] = [
     iconClass: "bg-[#D4A084]/15 text-[#D4A084]",
     workingText: "listening for songs & calls…",
     resultTitle: "Swainson's Thrush",
-    resultBody: "spiraling flute-like song · 94% confidence · common along shaded creek corridors",
+    resultBody:
+      "spiraling flute-like song · 94% confidence · common along shaded creek corridors",
   },
   {
     id: "capture",
@@ -36,7 +43,8 @@ const OPTIONS: SheetOption[] = [
     iconClass: "bg-[#2B4A35]/10 text-[#2B4A35]",
     workingText: "matching leaf & bark patterns…",
     resultTitle: "Quaking Aspen",
-    resultBody: "populus tremuloides · 89% confidence · fluttering leaves are a classic soft-fascination source",
+    resultBody:
+      "populus tremuloides · 89% confidence · fluttering leaves are a classic soft-fascination source",
   },
   {
     id: "alert",
@@ -47,7 +55,8 @@ const OPTIONS: SheetOption[] = [
     iconClass: "bg-[#991B1B]/10 text-[#991B1B]",
     workingText: "pinning your location…",
     resultTitle: "Wildlife pin dropped",
-    resultBody: "nearby hikers on this trail will see your alert for the next 4 hours",
+    resultBody:
+      "nearby hikers on this trail will see your alert for the next 4 hours",
   },
   {
     id: "parking",
@@ -58,7 +67,7 @@ const OPTIONS: SheetOption[] = [
     iconClass: "bg-blue-600/10 text-blue-700",
     workingText: "reading live trailhead pings…",
     resultTitle: "Trailhead lot: 62% full",
-    resultBody: "filling fast — typically at capacity by 10:00 am on weekends",
+    resultBody: "filling fast - typically at capacity by 10:00 am on weekends",
   },
 ];
 
@@ -99,18 +108,26 @@ export function CameraSheet({ onClose }: { onClose: () => void }) {
 
             {working ? (
               <div className="flex-1 flex flex-col items-center justify-center gap-3 py-6">
-                <div className={`p-3 rounded-xl ${active.iconClass} animate-pulse`}>
+                <div
+                  className={`p-3 rounded-xl ${active.iconClass} animate-pulse`}
+                >
                   <active.icon size={24} />
                 </div>
-                <p className="font-serif italic text-[15px] text-[#2B4A35]/70">{active.workingText}</p>
+                <p className="font-serif italic text-[15px] text-[#2B4A35]/70">
+                  {active.workingText}
+                </p>
               </div>
             ) : (
               <div className="flex flex-col gap-2 py-2">
                 <div className={`p-2.5 rounded-xl w-fit ${active.iconClass}`}>
                   <active.icon size={20} />
                 </div>
-                <h3 className="font-serif text-xl font-normal text-[#2B4A35]">{active.resultTitle}</h3>
-                <p className="font-sans text-xs text-[#2B4A35]/65 leading-relaxed">{active.resultBody}</p>
+                <h3 className="font-serif text-xl font-normal text-[#2B4A35]">
+                  {active.resultTitle}
+                </h3>
+                <p className="font-sans text-xs text-[#2B4A35]/65 leading-relaxed">
+                  {active.resultBody}
+                </p>
                 <button
                   onClick={onClose}
                   className="mt-3 w-full h-[44px] bg-[var(--color-pine)] text-white rounded-[8px] font-bold text-[13px] tracking-wide active:scale-[0.98] transition-transform"
@@ -128,7 +145,8 @@ export function CameraSheet({ onClose }: { onClose: () => void }) {
                 What's around you?
               </h3>
               <p className="font-sans text-xs text-[#2B4A35]/65 mt-0.5">
-                Identify landmarks, wildlife, or log local trail information instantly.
+                Identify landmarks, wildlife, or log local trail information
+                instantly.
               </p>
             </div>
 

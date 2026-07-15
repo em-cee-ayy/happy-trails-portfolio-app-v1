@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft } from "lucide-react";
+import { BackButton } from "../components/BackButton";
 
 export function PostHikeScreen() {
   const navigate = useNavigate();
@@ -12,27 +12,34 @@ export function PostHikeScreen() {
 
   return (
     <div className="flex flex-col h-full bg-[var(--color-paper)] relative">
-      <header className="px-4 pt-10 pb-4 flex items-center border-b border-[var(--color-forest)]/10 bg-[var(--color-paper)]/80 backdrop-blur-md sticky top-0 z-10">
-        <button onClick={handleSave} className="p-2 -ml-2 text-[var(--color-forest)]">
-          <ChevronLeft size={24} strokeWidth={1.5} />
-        </button>
-        <h1 className="font-serif italic text-lg text-[var(--color-forest)] ml-2">reflection</h1>
+      <header className="px-4 pt-10 pb-4 flex items-center gap-6 border-b border-[var(--color-forest)]/10 bg-[var(--color-paper)]/80 backdrop-blur-md sticky top-0 z-10">
+        <BackButton to="/home" />
+        <h1 className="font-serif italic text-lg text-[var(--color-forest)]">
+          reflection
+        </h1>
       </header>
 
       {/* pb-48 keeps the last field clear of the pinned Save & Return bar */}
       <div className="flex-1 overflow-y-auto p-4 pb-48">
         <div className="mb-6 space-y-2">
-          <h2 className="text-[22px] font-serif text-[var(--color-forest)] leading-tight">How was the trail?</h2>
+          <h2 className="text-[22px] font-serif text-[var(--color-forest)] leading-tight">
+            How was the trail?
+          </h2>
           <p className="text-[14px] text-[var(--color-forest)]/60 font-sans leading-relaxed">
-            this trains your matches. your feedback feeds the pattern engine to refine future restoration recommendations.
+            this trains your matches. your feedback feeds the pattern engine to
+            refine future restoration recommendations.
           </p>
         </div>
 
         <div className="space-y-6">
           <div className="space-y-4 pb-6 border-b border-[#eae1d0]">
             <div className="flex justify-between items-end">
-              <span className="text-[12px] font-bold uppercase tracking-wider text-[var(--color-forest)]">Restoration</span>
-              <span className="text-[17px] font-mono tabular-nums text-[var(--color-pine)]">{restoration.toFixed(1)}</span>
+              <span className="text-[12px] font-bold uppercase tracking-wider text-[var(--color-forest)]">
+                Restoration
+              </span>
+              <span className="text-[17px] font-mono tabular-nums text-[var(--color-pine)]">
+                {restoration.toFixed(1)}
+              </span>
             </div>
             <input
               type="range"
@@ -51,8 +58,12 @@ export function PostHikeScreen() {
 
           <div className="space-y-4 pb-6 border-b border-[#eae1d0]">
             <div className="flex justify-between items-end">
-              <span className="text-[12px] font-bold uppercase tracking-wider text-[var(--color-forest)]">Clarity</span>
-              <span className="text-[17px] font-mono tabular-nums text-[var(--color-pine)]">{clarity.toFixed(1)}</span>
+              <span className="text-[12px] font-bold uppercase tracking-wider text-[var(--color-forest)]">
+                Clarity
+              </span>
+              <span className="text-[17px] font-mono tabular-nums text-[var(--color-pine)]">
+                {clarity.toFixed(1)}
+              </span>
             </div>
             <input
               type="range"
@@ -71,8 +82,12 @@ export function PostHikeScreen() {
 
           <div className="space-y-4 pb-6 border-b border-[#eae1d0]">
             <div className="flex justify-between items-end">
-              <span className="text-[12px] font-bold uppercase tracking-wider text-[var(--color-forest)]">Energy Shift</span>
-              <span className="text-[17px] font-mono tabular-nums text-[var(--color-pine)]">{energyShift.toFixed(1)}</span>
+              <span className="text-[12px] font-bold uppercase tracking-wider text-[var(--color-forest)]">
+                Energy Shift
+              </span>
+              <span className="text-[17px] font-mono tabular-nums text-[var(--color-pine)]">
+                {energyShift.toFixed(1)}
+              </span>
             </div>
             <input
               type="range"
@@ -90,7 +105,9 @@ export function PostHikeScreen() {
           </div>
 
           <div className="space-y-3 pt-2">
-            <label className="text-[12px] font-bold uppercase tracking-wider text-[var(--color-forest)] block">Field Notes (optional)</label>
+            <label className="text-[12px] font-bold uppercase tracking-wider text-[var(--color-forest)] block">
+              Notes (optional)
+            </label>
             <textarea
               placeholder="e.g. the creek was louder than expected..."
               className="w-full bg-[var(--color-paper-deep)] border-none rounded-[8px] p-4 text-[14px] text-[var(--color-forest)] placeholder:text-[var(--color-forest)]/40 focus:ring-2 focus:ring-[var(--color-pine)]/50 resize-none h-24 font-sans"

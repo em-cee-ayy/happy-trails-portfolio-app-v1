@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronRight, MapPin, Star } from "lucide-react";
 import { TRAILS_DATA } from "../data";
+import { BackButton } from "../components/BackButton";
 
 export function MapScreen() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -10,7 +11,10 @@ export function MapScreen() {
   return (
     <div className="flex flex-col h-full bg-[var(--color-paper)] relative overflow-hidden">
       <header className="px-4 pt-10 pb-4 flex items-center justify-between border-b border-[var(--color-forest)]/10 bg-[var(--color-paper)]/80 backdrop-blur-md z-10">
-        <h1 className="font-serif italic text-lg text-[var(--color-forest)]">trail map</h1>
+        <div className="flex items-center gap-2">
+          <BackButton to="/home" />
+          <h1 className="font-serif italic text-lg text-[var(--color-forest)]">trail map</h1>
+        </div>
         <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-forest)]/50">
           {TRAILS_DATA.length} trails nearby
         </span>
